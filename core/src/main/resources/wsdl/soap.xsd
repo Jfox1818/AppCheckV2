@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<s:schema xmlns:s="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+          targetNamespace="http://schemas.xmlsoap.org/wsdl/soap/"
+          xmlns:s="http://www.w3.org/2001/XMLSchema">
+    <s:import namespace="http://schemas.xmlsoap.org/wsdl/" schemaLocation="wsdl.xsd"/>
+    <s:import namespace="http://schemas.xmlsoap.org/wsdl/soap12/" schemaLocation="soap12.xsd"/>
+    <s:import namespace="http://www.w3.org/2001/XMLSchema" schemaLocation="raidoapi.xsd"/>
+    <s:element name="binding">
+        <s:complexType>
+            <s:attribute name="transport" use="required" type="s:anyURI"/>
+        </s:complexType>
+    </s:element>
+    <s:element name="address">
+        <s:complexType>
+            <s:attribute name="location" use="required" type="s:anyURI"/>
+        </s:complexType>
+    </s:element>
+    <s:element name="operation">
+        <s:complexType>
+            <s:attribute name="soapAction" use="required" type="s:anyURI"/>
+            <s:attribute name="style" use="required" type="s:NCName"/>
+        </s:complexType>
+    </s:element>
+    <s:element name="body">
+        <s:complexType>
+            <s:attribute name="use" use="required" type="s:NCName"/>
+        </s:complexType>
+    </s:element>
+</s:schema>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<s:schema xmlns:s="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+          targetNamespace="http://www.w3.org/2001/XMLSchema"
+          xmlns:s="http://www.w3.org/2001/XMLSchema">
+    <s:import namespace="http://schemas.xmlsoap.org/wsdl/" schemaLocation="wsdl.xsd"/>
+    <s:import namespace="http://schemas.xmlsoap.org/wsdl/soap/" schemaLocation="soap.xsd"/>
+    <s:import namespace="http://schemas.xmlsoap.org/wsdl/soap12/" schemaLocation="soap12.xsd"/>
+    <s:element name="schema">
+        <s:complexType>
+            <s:choice maxOccurs="unbounded">
+                <s:element ref="s:complexType"/>
+                <s:element ref="s:element"/>
+                <s:element ref="s:simpleType"/>
+            </s:choice>
+            <s:attribute name="elementFormDefault" use="required" type="s:NCName"/>
+            <s:attribute name="targetNamespace" use="required" type="s:anyURI"/>
+        </s:complexType>
+    </s:element>
+    <s:element name="simpleType">
+        <s:complexType>
+            <s:sequence>
+                <s:element ref="s:restriction"/>
+            </s:sequence>
+            <s:attribute name="name" use="required" type="s:NCName"/>
+        </s:complexType>
+    </s:element>
+    <s:element name="restriction">
+        <s:complexType>
+            <s:sequence>
+                <s:element maxOccurs="unbounded" ref="s:enumeration"/>
+            </s:sequence>
+            <s:attribute name="base" use="required" type="s:NMTOKEN"/>
+        </s:complexType>
+    </s:element>
+    <s:element name="enumeration">
+        <s:complexType>
+            <s:attribute name="value" use="required" type="s:NCName"/>
+        </s:complexType>
+    </s:element>
+    <s:element name="element">
+        <s:complexType>
+            <s:sequence>
+                <s:element minOccurs="0" ref="s:complexType"/>
+            </s:sequence>
+            <s:attribute name="maxOccurs" type="s:NMTOKEN"/>
+            <s:attribute name="minOccurs" type="s:integer"/>
+            <s:attribute name="name" use="required" type="s:NCName"/>
+            <s:attribute name="nillable" type="s:boolean"/>
+            <s:attribute name="type" type="s:NMTOKEN"/>
+        </s:complexType>
+    </s:element>
+    <s:element name="complexType">
+        <s:complexType>
+            <s:sequence>
+                <s:element minOccurs="0" ref="s:complexContent"/>
+                <s:element minOccurs="0" ref="s:sequence"/>
+                <s:choice>
+                    <s:element ref="s:simpleContent"/>
+                    <s:element minOccurs="0" maxOccurs="unbounded" ref="s:attribute"/>
+                </s:choice>
+            </s:sequence>
+            <s:attribute name="abstract" type="s:boolean"/>
+            <s:attribute name="mixed" type="s:boolean"/>
+            <s:attribute name="name" type="s:NCName"/>
+        </s:complexType>
+    </s:element>
+    <s:element name="complexContent">
+        <s:complexType>
+            <s:complexContent>
+                <s:extension base="s:s.extension">
+                    <s:attribute name="mixed" use="required" type="s:boolean"/>
+                </s:extension>
+            </s:complexContent>
+        </s:complexType>
+    </s:element>
+    <s:element name="simpleContent" type="s:s.extension"/>
+    <s:complexType name="s.extension">
+        <s:sequence>
+            <s:element ref="s:extension"/>
+        </s:sequence>
+    </s:complexType>
+    <s:element name="extension">
+        <s:complexType>
+            <s:sequence>
+                <s:element minOccurs="0" ref="s:sequence"/>
+                <s:element minOccurs="0" maxOccurs="unbounded" ref="s:attribute"/>
+            </s:sequence>
+            <s:attribute name="base" use="required" type="s:NMTOKEN"/>
+        </s:complexType>
+    </s:element>
+    <s:element name="sequence">
+        <s:complexType>
+            <s:sequence>
+                <s:element maxOccurs="unbounded" ref="s:element"/>
+            </s:sequence>
+        </s:complexType>
+    </s:element>
+    <s:element name="attribute">
+        <s:complexType>
+            <s:attribute name="name" use="required" type="s:NCName"/>
+            <s:attribute name="type" use="required" type="s:NMTOKEN"/>
+            <s:attribute name="use" use="required" type="s:NCName"/>
+        </s:complexType>
+    </s:element>
+</s:schema>

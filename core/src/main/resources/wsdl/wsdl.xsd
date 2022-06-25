@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<s:schema xmlns:s="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+          targetNamespace="http://schemas.xmlsoap.org/wsdl/"
+          xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+    <s:import namespace="http://schemas.xmlsoap.org/wsdl/soap/" schemaLocation="soap.xsd"/>
+    <s:import namespace="http://schemas.xmlsoap.org/wsdl/soap12/" schemaLocation="soap12.xsd"/>
+    <s:import namespace="http://www.w3.org/2001/XMLSchema" schemaLocation="raidoapi.xsd"/>
+    <s:element name="definitions">
+        <s:complexType>
+            <s:sequence>
+                <s:element ref="wsdl:types"/>
+                <s:element maxOccurs="unbounded" ref="wsdl:message"/>
+                <s:element ref="wsdl:portType"/>
+                <s:element maxOccurs="unbounded" ref="wsdl:binding"/>
+                <s:element ref="wsdl:service"/>
+            </s:sequence>
+            <s:attribute name="targetNamespace" use="required" type="s:anyURI"/>
+        </s:complexType>
+    </s:element>
+    <s:element name="types">
+        <s:complexType>
+            <s:sequence>
+                <s:element ref="s:schema"/>
+            </s:sequence>
+        </s:complexType>
+    </s:element>
+    <s:element name="message">
+        <s:complexType>
+            <s:sequence>
+                <s:element ref="wsdl:part"/>
+            </s:sequence>
+            <s:attribute name="name" use="required" type="s:NCName"/>
+        </s:complexType>
+    </s:element>
+    <s:element name="part">
+        <s:complexType>
+            <s:attribute name="element" use="required" type="s:NMTOKEN"/>
+            <s:attribute name="name" use="required" type="s:NCName"/>
+        </s:complexType>
+    </s:element>
+    <s:element name="portType">
+        <s:complexType>
+            <s:sequence>
+                <s:element maxOccurs="unbounded" ref="wsdl:operation"/>
+            </s:sequence>
+            <s:attribute name="name" use="required" type="s:NCName"/>
+        </s:complexType>
+    </s:element>
+    <s:element name="binding">
+        <s:complexType>
+            <s:sequence>
+                <s:choice>
+                    <s:element ref="soap:binding"/>
+                    <s:element ref="soap12:binding"/>
+                </s:choice>
+                <s:element maxOccurs="unbounded" ref="wsdl:operation"/>
+            </s:sequence>
+            <s:attribute name="name" use="required" type="s:NCName"/>
+            <s:attribute name="type" use="required" type="s:NMTOKEN"/>
+        </s:complexType>
+    </s:element>
+    <s:element name="service">
+        <s:complexType>
+            <s:sequence>
+                <s:element maxOccurs="unbounded" ref="wsdl:port"/>
+            </s:sequence>
+            <s:attribute name="name" use="required" type="s:NCName"/>
+        </s:complexType>
+    </s:element>
+    <s:element name="port">
+        <s:complexType>
+            <s:choice>
+                <s:element ref="soap:address"/>
+                <s:element ref="soap12:address"/>
+            </s:choice>
+            <s:attribute name="binding" use="required" type="s:NMTOKEN"/>
+            <s:attribute name="name" use="required" type="s:NCName"/>
+        </s:complexType>
+    </s:element>
+    <s:element name="operation">
+        <s:complexType>
+            <s:sequence>
+                <s:choice minOccurs="0">
+                    <s:element ref="soap:operation"/>
+                    <s:element ref="soap12:operation"/>
+                </s:choice>
+                <s:element ref="wsdl:input"/>
+                <s:element ref="wsdl:output"/>
+            </s:sequence>
+            <s:attribute name="name" use="required" type="s:NCName"/>
+        </s:complexType>
+    </s:element>
+    <s:element name="input">
+        <s:complexType>
+            <s:choice minOccurs="0">
+                <s:element ref="soap:body"/>
+                <s:element ref="soap12:body"/>
+            </s:choice>
+            <s:attribute name="message" type="s:NMTOKEN"/>
+        </s:complexType>
+    </s:element>
+    <s:element name="output">
+        <s:complexType>
+            <s:choice minOccurs="0">
+                <s:element ref="soap:body"/>
+                <s:element ref="soap12:body"/>
+            </s:choice>
+            <s:attribute name="message" type="s:NMTOKEN"/>
+        </s:complexType>
+    </s:element>
+</s:schema>
